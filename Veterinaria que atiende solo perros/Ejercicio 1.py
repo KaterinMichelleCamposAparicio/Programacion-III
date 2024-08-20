@@ -1,42 +1,49 @@
-class ArticuloPapeleria:
-    def __init__(self, tipo, detalle, precio_compra):
-        self.tipo = tipo
-        self.detalle = detalle
-        self.precio_compra = precio_compra
-        self.margen_ganancia = 1.30
-        self.precio_venta = self.precio_compra * self.margen_ganancia
-        self.marca = "HOJITAS" if tipo == "cuaderno" else "RAYAS"
+""" Una veterinaria atiende solamente perros y los registra en una base de datos. Se requiere un programa que lea la información básica del perro
+   (no más de 8 características) y se muestre en pantalla. En esta veterinaria, todos los animales que llegan, entran con el estado inicial de 
+   NO ATENDIDO y cuando se registran se cambia automáticamente a ATENDIDO. Por ahora, como la veterinaria solo atiende perros, basado en el peso
+   (menos de 10 kg o más de 10 kg) los registra como "Perro Grande" o "Perro Pequeño"."""
+
+class Perro:
+    def __init__(self, nombre, raza, edad, peso, color, altura, vacunas, comportamiento):
+        self.nombre = nombre
+        self.raza = raza
+        self.edad = edad
+        self.peso = peso
+        self.color = color
+        self.altura = altura
+        self.vacunas = vacunas
+        self.comportamiento = comportamiento
+        self.tipo = "Perro Grande" if peso >= 10 else "Perro Pequeño"
+        self.estado = "NO ATENDIDO"  # Estado inicial
 
     def registrar(self):
-        print(f"\nEl {self.tipo} de marca {self.marca} ha sido registrado.")
+        self.estado = "ATENDIDO"  # Cambiar estado a "ATENDIDO"
+        print(f"\nEl perro {self.nombre} ha sido registrado como {self.tipo}. Estado: {self.estado}")
 
     def mostrar_informacion(self):
-        print("\n--- Información del Artículo Registrado ---")
-        print(f"Tipo: {self.tipo.capitalize()}")
-        print(f"Detalle: {self.detalle}")
-        print(f"Marca: {self.marca}")
-        print(f"Precio de Compra: ${self.precio_compra:.2f}")
-        print(f"Precio de Venta: ${self.precio_venta:.2f}")
+        print("\n--- Información del Perro Registrado ---")
+        print(f"Nombre: {self.nombre}")
+        print(f"Raza: {self.raza}")
+        print(f"Edad: {self.edad}")
+        print(f"Peso: {self.peso} kg")
+        print(f"Color: {self.color}")
+        print(f"Altura: {self.altura}")
+        print(f"Vacunas: {self.vacunas}")
+        print(f"Comportamiento: {self.comportamiento}")
+        print(f"Tipo: {self.tipo}")
+        print(f"Estado: {self.estado}")
 
-# Solicitar y registrar datos del artículo de papelería
-tipo = input("Ingrese el tipo de artículo (cuaderno/lapiz): ").lower()
-if tipo == "cuaderno":
-    detalle = input("Ingrese la cantidad de hojas (50/100): ")
-    if detalle not in ["50", "100"]:
-        print("Cantidad de hojas no válida.")
-        exit()
-elif tipo == "lapiz":
-    detalle = input("Ingrese el tipo de lápiz (grafito/color): ").lower()
-    if detalle not in ["grafito", "color"]:
-        print("Tipo de lápiz no válido.")
-        exit()
-else:
-    print("Tipo de artículo no reconocido.")
-    exit()
+# Solicitar y registrar datos del perro
+nombre = input("Ingrese el nombre del perro: ")
+raza = input("Ingrese la raza del perro: ")
+edad = int(input("Ingrese la edad del perro: "))
+peso = float(input("Ingrese el peso del perro en kg: "))
+color = input("Ingrese el color del perro: ")
+altura = input("Ingrese la altura del perro: ")
+vacunas = input("Ingrese el estado de vacunas (Sí/No): ")
+comportamiento = input("Ingrese el comportamiento del perro: ")
 
-precio_compra = float(input("Ingrese el precio de compra: "))
-
-# Crear instancia de ArticuloPapeleria y mostrar la información
-articulo = ArticuloPapeleria(tipo, detalle, precio_compra)
-articulo.mostrar_informacion()
-articulo.registrar()
+# Crear instancia de Perro y mostrar la información
+perro = Perro(nombre, raza, edad, peso, color, altura, vacunas, comportamiento)
+perro.mostrar_informacion()
+perro.registrar()
